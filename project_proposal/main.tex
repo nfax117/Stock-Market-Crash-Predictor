@@ -33,13 +33,85 @@
 
 \lstset{style=mystyle}
 \title{ECS 171 Final Project Proposal}
-\author{}
+\author{
+  Sergio Santoyo\\
+  \and
+  Yuan Chang\\
+  \and
+  Cesar Guzman Avina\\
+  \and
+  Will Colbert\\
+  \and
+  Nathaniel Faxon\\
+  \and
+  Kanchan Kaur\\
+  \and
+  Parminder Singh\\
+}
 \date{April 2022}
 
 \begin{document}
 
 \maketitle
 
-\section{Introduction}
+\section{Problem Statement}
 
+The goal of this project is to predict the next market crash using a S\&P 500 data-set that has the details about the daily price from 1927-12-30 to 2021-09-19. This project would be beneficial to any heavy investors who are susceptible to major losses as it allows them to know ahead of time when the market crash would be, and also would provide major upside for an investor who is willing to invest heavily during the market crash prediction date of our project returns. 
+
+\section{Data-set Description}
+The following are descriptions of the features for each observation in the data-set.
+
+	\begin{itemize}
+		\item Date - Trading date (YYYY-MM-DD)
+		\item Open (\#) - Market opening price
+		\item High (\#) - Highest price during the trading day.
+		\item Low (\#) - Lowest price during the
+		\item Close (\#) - Price when the market closed for the day.
+		\item Adjusted Close (\#) - Closing price after corporate actions are accounted for.
+		\item Volume (\#) - Number of shares traded during the trading day.
+		\item \% Gain/Loss (\#) - Percentage Change between 2 consecutive closing prices. (Shows the gain/loss between 2 trading days)
+		\item Price Variation (\#) - Price fluctuation during the day. ((high-low)/Close)
+
+
+	\end{itemize}
+\newpage
+
+\section{Goals}
+Our goals are:
+	\begin{itemize}
+		\item Predict when the next stock market crash will occur.
+		\item Provide investment recommendations based on current stats.
+		\item Let users know whether a stock of their choice would be a great investment if they invested in that stock during the crash. 
+
+	\end{itemize}
+
+\section{Roadmap}
+	\begin{enumerate}
+		\item Preprocess data from the dataset.
+			\begin{itemize}
+				\item Separate into independent and dependent variables and remove unnecessary columns.
+			\end{itemize}			 
+		\item Train the data.
+			\begin{itemize}
+				\item Use polynomial regression with a very high degree.
+			\end{itemize}	
+		\item Use trained data for prediction of crash.
+			\begin{itemize}
+				\item Test the trained data with the current state of S\&P 500 to see how accurate our prediction is. If it can accurately predict current values over about a two year gap, it should be able to predict patterns of potential drops and crashes.
+			\end{itemize}	
+		\item Use predicted crash to get investment recommendations.
+			\begin{itemize}
+				\item Based on stock price in comparison with other days/years.
+			\end{itemize}	
+		\item HTML part should be started.
+
+	\end{enumerate}
 \end{document}
+
+
+
+
+
+
+
+
