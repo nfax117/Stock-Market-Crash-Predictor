@@ -40,7 +40,7 @@ hr {
 }
 
 #navBarMain .nav-link {
-	color: white;
+	color: rgb(163, 105, 105);
 	font-size: 1.5rem;
 	font-weight: 100;
 }
@@ -51,9 +51,10 @@ hr {
 	font-weight: 100;
 }
 
-#headingGroup h1{
+#headingGroup h1{  /*Main Title of the page*/
 	font-weight: 100;
 	font-size: 50px;
+	color:rgb(248, 240, 223);
 }
 #headingGroup span{
 	color: rgb(157, 157, 157);
