@@ -83,6 +83,28 @@ Machine learning techniques have several applications to the problem of market p
 
 Zhao et al. investigated the problem of financial time series prediction by utilizing Long Short-Term Memory (LSTM) neural network as a good predictor of static and dynamic prediction. Stock data are categorized as time-series multidimensional vectors. In many cases, the time-series problem can be tackled by the LSTM. Kai Chen al. presented that a LSTM based approach used for predicting stock movements would return a $13\%$ better yield in accuracy compared to others. Additionally more similar to the work presented in this paper is the work done by Luca Di al. indicated that using LSTM and dropout over a 5-day prediction interval with only price series data produced a $72\%$ accuracy. To test the effectiveness of a time-weighted LSTM model, Zhao et al. conduct further studies on stock indexes such as the S\&P 500 and Dow Jones Industrial Index. It concluded that when altering the model to have the best parameters, the S\&P 500 returns $80.24\%$ accuracy while a single index such as Dow Jones Industrial Index returns an $83.21\%$. The accuracy of the models in these works, though not the highest result, can still be an effective indicator in predicting the market. 
 \section{Dataset Description and Exploratory Data Analysis} 
+The dataset used throughout this project was supplied from Kaggle. It provided us with 15032 rows which included the columns: closing, opening, low, and high prices as well as the volume, P/E ratio, \% gain and loss, and price variation for S\&P 500. Data was taken from 1962 to 2021. 
+Below is a description of each column:
+
+The following are descriptions of the features for each observation in the data-set.
+
+	\begin{itemize}
+		\item Date - Trading date (YYYY-MM-DD)
+		\item Open (\#) - Market opening price
+		\item High (\#) - Highest price during the trading day.
+		\item Low (\#) - Lowest price during the
+		\item Close (\#) - Price when the market closed for the day.
+		\item Adjusted Close (\#) - Closing price after corporate actions are accounted for.
+		\item Volume (\#) - Number of shares traded during the trading day.
+%		\item \% Gain/Loss (\#) - Percentage Change between 2 consecutive closing prices. (Shows the gain/loss between 2 trading days)
+%		\item Price Variation (\#) - Price fluctuation during the day. ((high-low)/Close)
+	\end{itemize}
+	
+The dataset was selected because of the extensive range of dates it includes as well as the amount of details it has for each date. Overall there is a general trend upwards in the data relating to the Open, Close, High, Low, and Volume. As seen in the plots below:
+\begin{center}
+	\includegraphics[scale=0.4]{p1.png}
+\end{center}
+
 \section{Proposed Methodology} 
 \section{Experimental Results} 
 \section{Conclusion and Evaluation} 
