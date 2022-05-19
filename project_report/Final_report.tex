@@ -116,6 +116,34 @@ In order to process the input data set in the correct format for time series ana
 
 Since we were going to be predicting data points in the stock market, we knew that this would be a regression model problem. With this, we knew a neural network would need to be used to predict and find relationships between the data. Due to the fact that we are using multiple previous day values to predict the future stock price, we had to find a type of neural network that could utilize multiple sequences of data. After looking around we found that the Long Short Term Memory model was able to use multiple sequences, and then began to work with that type of model. We started with a univariate model of just using the Open price but realized that using more data (Open, Close, High, Low, and Volume) in a multivariate model was much better than the univariate.
 
+The exact configurations of the two models are shown below:
+	\begin{itemize}
+		\item Univariate model
+			\begin{itemize}
+				\item Using closing price alone
+				\item 3 hidden layers
+					\begin{itemize}
+						\item  2 LSTM layer(one with return sequence, one without), 1 regular dense layer
+						\item Units = [128,64,32,1]
+						\item All using tanh as activation function, as default
+					\end{itemize}
+				\item First 2 layers employed dropout rate of 20\%
+				\item Mini batch size tested: 4, 12, 16, 24, where size 24 achieved best accuracy.
+			\end{itemize}
+		\item Multivariate model
+			\begin{itemize}
+				\item Using [Open, Low, High, Volume, Closing price] as input attributes
+				\item 3 hidden layers
+					\begin{itemize}
+						\item  2 LSTM layer(one with return sequence, one without), 1 regular dense layer
+						\item Units = [64,64,32,1]
+						\item All using tanh as activation function, as default
+					\end{itemize}
+				\item First 2 layers employed dropout rate of 20\%
+				\item Mini batch size tested: 24 and 36, where size 36 achieved best accuracy.
+			\end{itemize}
+	\end{itemize}
+
 While working on this model, we started to develop our website application so that our model could be interactive. We want to allow people to use our model and put in a date and get back an idea of the market price and whether or not there will be a crash. We use our pre-built and uploaded database to reference the data for the date that is requested.
 
 
@@ -123,7 +151,7 @@ While working on this model, we started to develop our website application so th
 
 Since the prediction model we are building is essentially a regression model, we are using MSE as the main evaluation metric to compare different performing models. 
 
-The initial model created was a LSTM Neural Network. This model had only a fraction of the data available in future models as it incorporated the PE Ratio, a measure only reported at the end of every month. As a result, the data fed into the network only included all quantitative data of every last day of the month since 1962. included 3 hidden layers, 128 nodes on the first, 64 nodes on the second, and 32 nodes on the final hidden layer node, all of which were using the tanh activation function.
+The initial model created was a LSTM Neural Network. This model had only a fraction of the data available in future models as it incorporated the PE Ratio, a measure only reported at the beginning of every month. As a result, the data fed into the network only included all quantitative data of every first day of the month since 1962. included 3 hidden layers, 128 nodes on the first, 64 nodes on the second, and 32 nodes on the final hidden layer node, all of which were using the tanh activation function.
 
 
 \section{Conclusion and Evaluation} 
