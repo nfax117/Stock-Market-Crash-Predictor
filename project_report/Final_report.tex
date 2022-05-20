@@ -5,8 +5,9 @@
 \usepackage{indentfirst}
 \usepackage{listings}
 \usepackage{xcolor}
-%\usepackage[backend=biber]{biblatex}
-%\addbibresource{refs.bib}
+\usepackage{hyperref}
+\usepackage{subfig}
+\usepackage{float}
 
 \definecolor{codegreen}{rgb}{0,0.6,0}
 \definecolor{codegray}{rgb}{0.5,0.5,0.5}
@@ -53,7 +54,35 @@
 
 \begin{document}
 
-\maketitle
+\begin{titlepage}
+   \begin{center}
+       \vspace*{4cm}
+		\Large
+       \textbf{Market Prediction Algorithm}
+
+       \vspace{0.5cm}
+        ECS 171: Machine Learning \\
+        Group 7 Project Report
+       \vspace{1.5cm}
+
+       \textbf{Group member:}\\
+Parminder Singh, Yuan Chang, Nathaniel Faxon, Cesar Guzman Avina, Kanchan Kaur, Will Colbert, Sergio Santoyo
+
+       \vfill
+       \href{https://github.com/nfax117/ECS171_Proj1}{Github Repository Link}
+            
+       \vspace{0.8cm}
+%     
+%            
+%       Department Name\\
+%       University Name\\
+%       Country\\
+%       Date
+            
+   \end{center}
+\end{titlepage}
+
+
 \section{Introduction \& Background}
 The stock market has evolved into a major component of our lives, as well as a reflection of the national and global economy. A stock represents ownership, or equity stake, in the company, and has served as a way for companies to raise capital. Additionally, the stock market enables individuals to grow their wealth, while holding companies accountable and keeping an eye on corporate regulation. The stock market impacts the overall economy, and therefore, impacts everyone, including non-investors. Because stock markets span all industries and sectors, it is a key factor in determining the state and cycle of the economy.
 
@@ -63,7 +92,6 @@ Machine learning can be used to identify stock market and financial trends, typi
 
 If a market prediction model is built to successfully predict a stock market crash, it can be beneficial to investors, while also giving a warning to companies and the general public. It can also be used in various fields/sectors. Here are a some examples: 
 
-\newpage
 	\begin{itemize}
 		\item Communication and Media
 			\begin{itemize}
@@ -103,20 +131,67 @@ The following are descriptions of the features for each observation in the data-
 	\end{itemize}
 	
 The dataset was selected because of the extensive range of dates it includes as well as the amount of details it has for each date. Overall there is a general trend upwards in the data relating to the Open, Close, High, Low, and Volume. As seen in the plots below:
-\begin{center}
-	\includegraphics[scale=0.4]{p1.png}
-\end{center}
+\begin{figure}[h!]
+\subfloat[Plot for open, close, high and low]{{\includegraphics[scale=0.375]{p1.png} }}
+    \qquad
+    \subfloat[Plot for volume]{{\includegraphics[scale=0.375]{p2.png} }}
+    \caption{Example plots of the stock market's attributes}
+    \label{fig:example}
+\end{figure}
 
-For the time series analysis, we are using the full S\&P 500 dataset as well as a condensed version of it. There are 15032 data points in the full dataset and 717 data points in the condensed. The condensed dataset contains data points of the first day of every month from 1962 till 2021, while the full data set captures data points daily. Both datasets contain the first 6 attributes. 
+
+We thought that the PE ratio would be a stronger indicator of the market’s trend, and we used an additional S\&P 500 dataset that contains the monthly PE ratio. In order to facilitate the PE ratio data, we extracted the attributes of the stock market for the first day of each month, and added the PE ratio column. This becomes the condensed datasets, which contain 717 data points.
+
+PE ratio was excluded from the input attributes at the later stage, because it didn’t produce very accurate prediction models. After excluding it, we are free to use the daily stock dataset, which contains 15032 data points.
 
 In order to process the input data set in the correct format for time series analysis, we chose 14 data points as our time step. Essentially, we are using the first 14 data points to predict the 15th data point, and slide the window along the entire dataframe. 
+ 
 
 
 \section{Proposed Methodology} 
 
+We will present here different models that we experimented with. They are polynomial regression, univariate and multivariate time series analysis models. 
+
+\subsection{Polynomial and Linear Regression}
+
+As a basic starting step, we wanted to see if there were any relationships between a S\&P 500’s stock closing price and some other variable. After doing some research, we found that a good prediction of a stock's price comes from its P/E ratio multiplied by EPS. We made a dataset containing the value at the beginning of each month of the P/E ratio, EPS, P/E ratio multiplied by EPS, and the closing price for S\&P 500. To confirm variable relationships, we created a heat map(figure 3) with the variables as well as a pairplot(figure 2):
+
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[scale=0.45]{p4.png}\caption{Heat map for the attributes}
+	\end{center}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.45]{p3.png}\caption{Heat map for the attributes}
+	\end{center}
+\end{figure}
+
+As seen from the figures 2 and 3, Closing price and P/E * EPS seems to have a linear relationship. To test this, we created a linear regression model first to see the training MSE (Mean Squared Error) and how well a line visually fits the data. We also did a polynomial regression model with a degree of 2 just to see if the data had a polynomial relationship. For both these models, Sklearn’s Linear and Polynomial regression libraries were used and training and testing data was split by 80:20.
+
+\begin{figure}[H]
+\subfloat[Linear regression model plot]{{\includegraphics[scale=0.4]{p5.png} }}
+    \qquad
+    \subfloat[Plot for volume]{{\includegraphics[scale=0.5]{p6.png} }}
+    \caption{Plotted models}
+    \label{fig:example}
+\end{figure}
+Based on the above results, there is a very high R2 score for both the linear and polynomial regressions which means that the line fits the data pretty well, thus high correlation between the two variables. There is a very high MSE, but this is due to how large the data values are and how many values there are in general. Though these models have helped show variable relationships and trends, we wanted to create more models that take into account more variables.
+
+\subsection{Univariate}
+In our most current implementation, we applied open, low, high, and volume features in addition to the closing price.
+In our second version of our implementation it came to notice that our dataset is linked to time. So we approached it now using a Long Short Term Memory neural network. We started with a univariate LSTM model where the model predicted the closing price of the next day using the previous 50 days (time step), but the model failed to predict anything. We then chose to change the time step to 14 days, as this was the most used machine learning approach on the stock market. That result was looking promising, but we then realized that using previous closing prices to predict the next closing price is not a good feature. We decided to proceed in using more than one feature in our dataset to strengthen our model. 
+
+\subsection{Multivariate}
+In our most current implementation, we applied open, low, high, and volume features in addition to the closing price.
+
 Since we were going to be predicting data points in the stock market, we knew that this would be a regression model problem. With this, we knew a neural network would need to be used to predict and find relationships between the data. Due to the fact that we are using multiple previous day values to predict the future stock price, we had to find a type of neural network that could utilize multiple sequences of data. After looking around we found that the Long Short Term Memory model was able to use multiple sequences, and then began to work with that type of model. We started with a univariate model of just using the Open price but realized that using more data (Open, Close, High, Low, and Volume) in a multivariate model was much better than the univariate.
 
-The exact configurations of the two models are shown below:
+While working on this model, we started to develop our website application so that our model could be interactive. We want to allow people to use our model and put in a date and get back an idea of the market price and whether or not there will be a crash. We use our pre-calculated data and upload it to a database to reference for when a date's data is requested.
+
+\subsection{Time Series Model Configuration}
+The exact configurations of the two time series models are shown below:
 	\begin{itemize}
 		\item Univariate model
 			\begin{itemize}
@@ -144,7 +219,7 @@ The exact configurations of the two models are shown below:
 			\end{itemize}
 	\end{itemize}
 
-While working on this model, we started to develop our website application so that our model could be interactive. We want to allow people to use our model and put in a date and get back an idea of the market price and whether or not there will be a crash. We use our pre-built and uploaded database to reference the data for the date that is requested.
+%While working on this model, we started to develop our website application so that our model could be interactive. We want to allow people to use our model and put in a date and get back an idea of the market price and whether or not there will be a crash. We use our pre-built and uploaded database to reference the data for the date that is requested.
 
 
 \section{Experimental Results} 
