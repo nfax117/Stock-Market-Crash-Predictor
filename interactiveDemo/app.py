@@ -26,15 +26,55 @@ class InputForm(Form):
     day13 = StringField('Day 13', validators=[validators.InputRequired()])
     day14 = StringField('Day 14', validators=[validators.InputRequired()])
 
+def makeFloatList(day):
+    #remove any white space
+    day.strip()
 
+    #split into a list by commas
+    day.split(",")
+    
+    #convert to a list of floats
+    float_days = [float(i) for i in day]
+    return float_days
 @app.route('/', methods = ['GET', 'POST'])
 def index():
     form = InputForm()
-    # if request.method == 'POST' and form.validate():
-        #parse form info and call backend
-        # out = flask_backend.run(name)
-        # output=str(out)
-        # return render_template("outputs/"+output+'.html')
+    if request.method == 'POST' and form.validate():
+        # parse form info and call backend
+        app.logger.info('in post')
+        all_days = []
+        day1 = makeFloatList(form.day1.data)
+        all_days.append(day1)
+        day2 = makeFloatList(form.day2.data)
+        all_days.append(day2)
+        day3 = makeFloatList(form.day3.data)
+        all_days.append(day3)
+        day4 = makeFloatList(form.day4.data)
+        all_days.append(day4)
+        day5 = makeFloatList(form.day5.data)
+        all_days.append(day5)
+        day6 = makeFloatList(form.day6.data)
+        all_days.append(day6)
+        day7 = makeFloatList(form.day7.data)
+        all_days.append(day7)
+        day8 = makeFloatList(form.day8.data)
+        all_days.append(day8)
+        day9 = makeFloatList(form.day9.data)
+        all_days.append(day9)
+        day10 = makeFloatList(form.day10.data)
+        all_days.append(day10)
+        day11 = makeFloatList(form.day11.data)
+        all_days.append(day11)
+        day12 = makeFloatList(form.day12.data)
+        all_days.append(day12)
+        day13 = makeFloatList(form.day13.data)
+        all_days.append(day13)
+        day14 = makeFloatList(form.day14.data)
+        all_days.append(day14)
+
+        out = flask_backend.run(all_days)
+        output=str(out)
+        return render_template('results.html', prediction = output)
     return render_template('home.html', form = form)
 
 if __name__=='__main__':
