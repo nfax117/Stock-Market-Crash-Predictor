@@ -2,6 +2,7 @@
 *.aux
 *.log
 *.synctex.gz
+*.out
 
 # Binaries for programs and plugins
 *.exe
