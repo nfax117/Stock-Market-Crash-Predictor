@@ -113,7 +113,7 @@ Machine learning techniques have several applications to the problem of market p
 Zhao et al. investigated the problem of financial time series prediction by utilizing Long Short-Term Memory (LSTM) neural network as a good predictor of static and dynamic prediction. Stock data are categorized as time-series multidimensional vectors. In many cases, the time-series problem can be tackled by the LSTM. Kai Chen al. presented that a LSTM based approach used for predicting stock movements would return a $13\%$ better yield in accuracy compared to others.\cite{LSTM} Additionally more similar to the work presented in this paper is the work done by Luca Di al. indicated that using LSTM and dropout over a 5-day prediction interval with only price series data produced a $72\%$ accuracy.\cite{Time-Weighted LSTM} To test the effectiveness of a time-weighted LSTM model, Zhao et al. conduct further studies on stock indexes such as the S\&P 500 and Dow Jones Industrial Index. It concluded that when altering the model to have the best parameters, the S\&P 500 returns $80.24\%$ accuracy while a single index such as Dow Jones Industrial Index returns an $83.21\%$.\cite{RNN} The accuracy of the models in these works, though not the highest result, can still be an effective indicator in predicting the market.
 
 \section{Dataset Description and Exploratory Data Analysis} 
-The dataset used throughout this project was supplied from Kaggle. It provided us with 15032 rows which included the columns: closing, opening, low, and high prices as well as the volume, P/E ratio, \% gain and loss, and price variation for S\&P 500. Data was taken from 1962 to 2021. 
+The dataset used throughout this project was supplied from Kaggle and Nasdaq. It provided us with 15032 rows which included the columns: closing, opening, low, and high prices as well as the volume, \% gain and loss, and price variation for S\&P 500. Data was taken from 1962 to 2021.\cite{SNP_Daily} 
 Below is a description of each column:
 
 The following are descriptions of the features for each observation in the data-set.
@@ -140,7 +140,7 @@ The dataset was selected because of the extensive range of dates it includes as 
 \end{figure}
 
 
-We thought that the PE ratio would be a stronger indicator of the market’s trend, and we used an additional S\&P 500 dataset that contains the monthly PE ratio. In order to facilitate the PE ratio data, we extracted the attributes of the stock market for the first day of each month, and added the PE ratio column. This becomes the condensed datasets, which contain 717 data points.
+We thought that the PE ratio would be a stronger indicator of the market’s trend, and we used an additional S\&P 500 dataset that contains the monthly PE ratio\cite{SNP_PE_Monthly}, and it is from Nasdaq. In order to facilitate the PE ratio data, we extracted the attributes of the stock market for the first day of each month, and added the PE ratio column. This becomes the condensed datasets, which contain 717 data points.
 
 PE ratio was excluded from the input attributes at the later stage, because it didn’t produce very accurate prediction models. After excluding it, we are free to use the daily stock dataset, which contains 15032 data points.
 
@@ -224,13 +224,48 @@ The exact configurations of the two time series models are shown below:
 
 \section{Experimental Results} 
 
-Since the prediction model we are building is essentially a regression model, we are using MSE as the main evaluation metric to compare different performing models. 
+Since the prediction model we are building is essentially a regression model, we are using MSE and R2 score as the main evaluation metrics to compare different performing models. 
 
-The initial model created was a LSTM Neural Network. This model had only a fraction of the data available in future models as it incorporated the PE Ratio, a measure only reported at the beginning of every month. As a result, the data fed into the network only included all quantitative data of every first day of the month since 1962. included 3 hidden layers, 128 nodes on the first, 64 nodes on the second, and 32 nodes on the final hidden layer node, all of which were using the tanh activation function.
+The experimental results for the linear and polynomial regression models were shown in the previous section, this section will be devoted to demonstrate the performance of the time series analysis models.
 
+\subsection{Predicted Price Plots}
+
+In order to visualize the performance of each time series model, we plotted the entire predicted price against the actual price. Note that the condensed model plots are plotting monthly, whereas the full models are plotting daily.\\
+
+Below are the plots for the models that were trained using the condensed dataset, where it is spanning from Jan of 1962 to September of 2021, and the data is recorded monthly.
+
+\begin{figure}[H]
+\subfloat[Condensed Univariate]{{\includegraphics[scale=0.3]{p7.png} }}
+    \qquad
+    \subfloat[Condensed Multivariate]{{\includegraphics[scale=0.3]{p8.png} }}
+    \caption{Predicted Price plots(1)}
+    \label{fig:example}
+\end{figure}
+
+For the next two graphs, they are predicted price plots using models trained using the full dataset. The full dataset contains daily recordings of the stock market since January $2^{\text{nd}}$ 1962 till September $17^{\text{th}}$ 2021.
+
+\begin{figure}[H]
+\subfloat[Full Univariate]{{\includegraphics[scale=0.3]{p9.png} }}
+    \qquad
+    \subfloat[Full Multivariate]{{\includegraphics[scale=0.3]{p10.png} }}
+    \caption{Predicted Price plots(2)}
+    \label{fig:example}
+\end{figure}
+
+\subsection{MSE \& R2 scores}
+We have calculated the MSE and R2 score of all the time series models. We saw a sharp decrease of MSE error when the dataset increased from condensed to full, and an overall increase of R2 score as well. 
+
+\begin{figure}[H]
+	\begin{center}
+		\includegraphics[scale=0.45]{p11.png}\caption{MSE and R2 scores of the time series models}
+	\end{center}
+\end{figure}
+
+We also noticed that the highest R2 score and the lowest MSE error were both recorded on the univariate model that was trained using the full dataset. This made sense as the univariate model was using closing price's history to predict future closing price. Whereas multivariate model had attributes such as volume that might negatively impact the performance, since volume has weaker correlation to closing price compared to other attributes.  
 
 \section{Conclusion and Evaluation} 
 
+\newpage
 \begin{thebibliography}{9}
 \bibitem{LSTM}
 K. Chen, Y. Zhou and F. Dai, "A LSTM-based method for stock returns prediction: A case study of China stock market," 2015 IEEE International Conference on Big Data (Big Data), 2015, pp. 2823-2824, doi: 10.1109/BigData.2015.7364089.
@@ -240,6 +275,12 @@ Di Persio, Luca, and Oleksandr Honchar. "Recurrent neural networks approach to t
 
 \bibitem{RNN}
 Z. Zhao, R. Rao, S. Tu and J. Shi, "Time-Weighted LSTM Model with Redefined Labeling for Stock Trend Prediction," 2017 IEEE 29th International Conference on Tools with Artificial Intelligence (ICTAI), 2017, pp. 1210-1217, doi: 10.1109/ICTAI.2017.00184.
+
+\bibitem{SNP_Daily}
+Myungchan Kim, "S\&P 500 Daily Data (1927-12-30 to 2021-09-19)," Yahoo Finance, url: https://www.kaggle.com/datasets/myungchankim/sp-500-daily-data-19281230-to-20210919/metadata.
+
+\bibitem{SNP_PE_Monthly}
+Nasdaq Data Link, "S\&P 500 PE Ratio by Month," Yahoo Finance, Data Link Code: MULTPL/SP500\_PE\_RATIO\_MONTH, url: https://data.nasdaq.com/data/MULTPL/SP500\_PE\_RATIO\_MONTH.
 
 \end{thebibliography}
 \end{document}
