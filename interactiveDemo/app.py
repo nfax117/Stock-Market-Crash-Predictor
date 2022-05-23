@@ -31,17 +31,18 @@ def makeFloatList(day):
     day.strip()
 
     #split into a list by commas
-    day.split(",")
+    day = day.split(",")
+    app.logger.info(day)
     
     #convert to a list of floats
     float_days = [float(i) for i in day]
     return float_days
 @app.route('/', methods = ['GET', 'POST'])
 def index():
-    form = InputForm()
+    form = InputForm(request.form)
+    app.logger.info('index')
     if request.method == 'POST' and form.validate():
-        # parse form info and call backend
-        app.logger.info('in post')
+        app.logger.info("in post")
         all_days = []
         day1 = makeFloatList(form.day1.data)
         all_days.append(day1)
@@ -73,9 +74,11 @@ def index():
         all_days.append(day14)
 
         out = flask_backend.run(all_days)
-        output=str(out)
-        return render_template('results.html', prediction = output)
-    return render_template('home.html', form = form)
+        result=str(out)
+    else:
+        app.logger.info('in else')
+        result = None
+    return render_template('home.html', form = form, result = result)
 
 if __name__=='__main__':
     app.run()

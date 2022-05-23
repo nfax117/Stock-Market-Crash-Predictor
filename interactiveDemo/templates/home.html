@@ -14,5 +14,14 @@
         </table>
         <p><input type=submit value=Submit></p>
     </form>
+    <div>
+        {% if result != None %}
+            <h3>Predicted Closing Price:</h3>
+            <p>
+                {{result}}
+            </p>
+        {% endif %}
+    </div>
+        
     </div>
 {%endblock%}
