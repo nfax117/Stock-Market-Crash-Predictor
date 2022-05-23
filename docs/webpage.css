@@ -13,8 +13,12 @@ hr {
     z-index: -1;
 }
 
-.bullets {
-    line-height: 3px;
+li {
+	text-align: left;
+}
+
+.subhead {
+	font-size: 20px;
 }
 
 .names {
