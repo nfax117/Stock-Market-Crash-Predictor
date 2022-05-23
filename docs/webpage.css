@@ -17,6 +17,10 @@ li {
 	text-align: left;
 }
 
+ul {
+	color: white;
+}
+
 .subhead {
 	font-size: 20px;
 }
