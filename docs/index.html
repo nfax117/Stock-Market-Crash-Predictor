@@ -147,7 +147,11 @@
               <h2>Data Analysis: Heatmap and Pairplots</h2>
 
               <p class="lead">
-                input text here
+                As a basic starting step, we wanted to see if there were any relationships between a S&P 500’s stock closing price and some other variable. 
+                After doing some research, we found that a good prediction of a stock's price comes from its <strong>P/E ratio multiplied by EPS</strong>. 
+                We made a dataset containing the value at the beginning of each month of the P/E ratio, EPS, P/E ratio multiplied by EPS, and the closing price 
+                for S&P 500. To confirm variable relationships, we created a <strong>heat map </strong> with the variables as well as a <strong>pairplot</strong>.
+                As seen to the left, Closing price and P/E * EPS seems to have a linear relationship.
               </p>
             </div>
           </div>
@@ -168,7 +172,13 @@
               <h2>Linear and Polynomial Regression on P/E &#215; EPS and Closing Price</h2>
 
               <p class="lead">
-                input text here
+                Since closing price and P/E * EPS seems to have a linear relationship, we created a <strong>linear regression model </strong> first to see the 
+                <strong>training MSE (Mean Squared Error) </strong> and how well a line visually fits the data. We also did a <strong>polynomial regression model 
+                with a degree of 2 </strong> just to see if the data had a polynomial relationship. For both these models, Sklearn’s Linear and Polynomial 
+                regression libraries were used and training and testing data was split by 80:20. Based on the shown results, there is a very high <strong>R2 score 
+                </strong> for both the linear and polynomial regressions which means that the line fits the data pretty well, thus high correlation between the two 
+                variables. There is a very high MSE, but this is due to how large the data values are and how many values there are in general. Though these models 
+                have helped show variable relationships and trends, we wanted to create more models that take into account more variables.
               </p>
             </div>
           </div>
@@ -185,11 +195,29 @@
         <div class="col-lg-6 text-center order-1 order-md-2 blurb mb-5 mb-md-0">
           <div class="row justify-content-center">
             <div class="col-10 col-lg-8">
-              <h2>Description 4</h2>
+              <h2>Univariate</h2>
 
               <p class="lead">
-                input text here
+                In our second version of our implementation it came to notice that our dataset is linked to time. So we approached it now using a <strong> Long Short 
+                Term Memory neural network </strong>. We started with a <strong>univariate LSTM model </strong> where the model predicted the closing price of the next 
+                day using the previous 50 days (time step), but the model failed to predict anything. We then chose to change the time step to 14 days, as this was the 
+                most used machine learning approach on the stock market. That result was looking promising, but we then realized that using previous closing prices to 
+                predict the next closing price is not a good feature. We decided to proceed in using more than one feature in our dataset to strengthen our model. 
               </p>
+
+              <div class="bullets">
+                <h3>Univariate Model</h3>
+                <p>Using closing price alone</p>
+                <p>3 hidden layers
+                    <p>2 LSTM layer(one with return sequence, one without), 1 regular dense layer</p>
+                    <p>Units = [128, 64, 32, 1]</p>
+                    <p>All using tanh as activation function, as default</p>
+                </p>
+                <p>First 2 layers employed dropout rate of 20%</p>
+                <p>Mini batch size tested: 4, 12, 16, 24. Highest accuracy achieved with 24 batch size. </p>
+
+              </div>
+              
             </div>
           </div>
         </div>
@@ -206,11 +234,30 @@
         <div class="col-lg-6 text-center order-2 order-md-1 blurb mb-5 mb-md-0">
           <div class="row justify-content-center">
             <div class="col-10 col-lg-8">
-              <h2>Description 5</h2>
+              <h2>Multivariate</h2>
 
               <p class="lead">
-                input text here
+                In our most current implementation, we applied open, low, high, and volume features in addition to the closing price. Since we were going to be predicting 
+                data points in the stock market, we knew that this would be a regression model problem. With this, we knew a neural network would need to be used to predict 
+                and find relationships between the data. Due to the fact that we are using multiple previous day values to predict the future stock price, we had to find a 
+                type of neural network that could utilize multiple sequences of data. After looking around we found that the Long Short Term Memory model was able to use 
+                multiple sequences, and then began to work with that type of model. We started with a univariate model of just using the Open price but realized that using 
+                more data (Open, Close, High, Low, and Volume) in a <strong>multivariate model </strong> was much better than the univariate.
               </p>
+
+              <p>
+                Multivariate model
+                Using [Open, Low, High, Volume, Closing price] as input attributes
+                3 hidden layers
+                2 LSTM layer(one with return sequence, one without), 1 regular dense layer
+                Units = [64, 64, 32 ,1], reduced complexity from univariate model
+                All using tanh as activation function, as default
+                First 2 layers employed dropout rate of 20%
+                Mini batch size tested: 24，36
+                Achieved highest accuracy with 36 batch size
+                
+              </p>
+
             </div>
           </div>
         </div>
@@ -226,10 +273,14 @@
         <div class="col-lg-6 text-center order-1 order-md-2 blurb mb-5 mb-md-0">
           <div class="row justify-content-center">
             <div class="col-10 col-lg-8">
-              <h2>Description 6</h2>
+              <h2>Experimental Results</h2>
 
               <p class="lead">
-                input text here
+                The initial model created was a LSTM Neural Network. This model had only a fraction of the data available in future models as it incorporated the PE Ratio, 
+                a measure only reported at the end of every month. As a result, the data fed into the network only included all quantitative data of every last day of the 
+                month since 1962. included 3 hidden layers, 128 nodes on the first, 64 nodes on the second, and 32 nodes on the final hidden layer node, all of which were 
+                using the tanh activation function.
+
               </p>
             </div>
           </div>
@@ -247,7 +298,7 @@
         <div class="col-lg-6 text-center order-2 order-md-1 blurb mb-5 mb-md-0">
           <div class="row justify-content-center">
             <div class="col-10 col-lg-8">
-              <h2>Description 7</h2>
+              <h2>Conclusion</h2>
 
               <p class="lead">
                 input text here
