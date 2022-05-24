@@ -5,7 +5,7 @@
 #### We are using Keras' ANN model to conduct time series analysis on the SNP 500 stock market and try to predict the closing price of the stock.
 
 ![Example](./project_report/p7.png)
-![Example](./figures/head.png)
+![Example](./project_report/p8.png)
 
 # Group Members
 
