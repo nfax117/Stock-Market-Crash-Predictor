@@ -6,7 +6,7 @@ from keras.preprocessing import sequence
 from keras import backend as K
 
 
-def run(list_of_days_info):
+def run(day_info):
     SNP = pd.read_csv('../SPX_500_Data.csv')
     SNP = SNP.drop(['Adj Close', 'Date','% Gain/Loss (Close)','% Price Variation'], axis=1)
     # get all attributes
@@ -18,19 +18,24 @@ def run(list_of_days_info):
     SNP_attributes = scaler.transform(SNP_attributes)
 
     K.clear_session()
-    f = open("model_architecture.json", 'r+')
+    f = open("model_architecture_mulBIG.json", 'r+')
     json_string = f.read()
     f.close()
     model = model_from_json(json_string)
 
-    model.load_weights('model_weights.h5')
+    model.load_weights('model_weights_mulBIG.h5')
     model.compile(optimizer='adam', loss='mean_squared_error')
-    # 1 set of data x 14 days x 6 pieces of data each day
-    # Use past 14 days topredict today's closing price
-    # [ [[P/E Ratio,Open,Low,High,Volume,Closing Price]], ... 13 more times]
-    # using line 694 of SP500 csv
     
-    info = np.array([list_of_days_info])
+    day_info =  np.array(day_info)
+    day_info = np.reshape(day_info, (5, 1))
+    info = []
+    info.append([SNP_attributes[-44:,0:5]])
+    info = np.array(info)
+    info = np.reshape(info, (1,44,5))
+    info = np.append(info, day_info)
+    info = np.reshape(info, (1,45,5))
+    # print(info.shape())
+
     #returns a probabilistic output, 
     prediction = model.predict(info)
     prediction = np.repeat(prediction,info.shape[2], axis=-1)

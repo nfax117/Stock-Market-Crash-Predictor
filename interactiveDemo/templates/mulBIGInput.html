@@ -1,0 +1,27 @@
+{% extends 'layout.html'%}
+{%block body%}
+    <div class='inputbox'>
+    <h2>Predict 09/19/2021 Closing Price</h2>
+    <p>Please Enter the S&P 500's Open, High, Low, Close, and Volume for 09/18/2021 seperated by commas.</p>
+    <br>
+    <form method="POST" action="">
+        <table>
+            {% for field in form %}
+            <tr>
+            <td>{{ field.label }}</td><td>{{ field }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <p><input type=submit value=Submit></p>
+    </form>
+    <div>
+        {% if result != None %}
+            <h3>Predicted Closing Price:</h3>
+            <p>
+                {{result}}
+            </p>
+        {% endif %}
+    </div>
+        
+    </div>
+{%endblock%}
