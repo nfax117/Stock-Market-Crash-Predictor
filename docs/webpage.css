@@ -18,11 +18,16 @@ li {
 }
 
 ul {
-	color: rgb(254, 251, 243);
+	color: rgb(248, 240, 223);
 }
 
 .subhead {
 	font-size: 20px;
+}
+
+#rightmore {
+	margin-left: 150px;
+	padding-left: 100px;
 }
 
 .names {
