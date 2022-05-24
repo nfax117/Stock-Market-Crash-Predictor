@@ -128,6 +128,8 @@ The following are descriptions of the features for each observation in the data-
 		\item Volume (\#) - Number of shares traded during the trading day.
 %		\item \% Gain/Loss (\#) - Percentage Change between 2 consecutive closing prices. (Shows the gain/loss between 2 trading days)
 %		\item Price Variation (\#) - Price fluctuation during the day. ((high-low)/Close)
+		\item P/E ratio - Ratio of a company's share price to the company's earning per share.
+		\item EPS - Monetary value of earning per outstanding share of common stock for a company.
 	\end{itemize}
 	
 The dataset was selected because of the extensive range of dates it includes as well as the amount of details it has for each date. Overall there is a general trend upwards in the data relating to the Open, Close, High, Low, and Volume. As seen in the plots below:
@@ -218,7 +220,7 @@ The exact configurations of the two time series models are shown below:
 				\item Mini batch size tested: 24 and 36, where size 36 achieved best accuracy.
 			\end{itemize}
 	\end{itemize}
-\textit{Note: that all time series models used 14 data points as the time step size.}
+\textit{Note: that series models that were trained from the condensed data set used time step of 14, where the models trained with full data set used time step of 45.}
 %While working on this model, we started to develop our website application so that our model could be interactive. We want to allow people to use our model and put in a date and get back an idea of the market price and whether or not there will be a crash. We use our pre-built and uploaded database to reference the data for the date that is requested.
 
 
