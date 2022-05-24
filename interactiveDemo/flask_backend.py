@@ -7,12 +7,10 @@ from keras import backend as K
 
 
 def run(list_of_days_info):
-    SNP = pd.read_csv('./SP500.csv')
-
+    SNP = pd.read_csv('../SPX_500_Data.csv')
+    SNP = SNP.drop(['Adj Close', 'Date','% Gain/Loss (Close)','% Price Variation'], axis=1)
     # get all attributes
-    SNP_attributes = SNP.iloc[:,2:7]
-    # get last column (y)
-    SNP_price = SNP.iloc[:,-1:]
+    SNP_attributes = SNP.iloc[:,:]
 
     # normalize the data using MinMax scaller
     scaler = MinMaxScaler()

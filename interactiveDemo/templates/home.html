@@ -2,7 +2,7 @@
 {%block body%}
     <div class='inputbox'>
     <h2>Predict Today's Closing Price</h2>
-    <p>Please Enter the P/E Ratio, Open, Low, High, Volume, and Closing Price of the past 14 days seperated by commas.</p>
+    <p>Please Enter the S&P 500's Open, High, Low, Close, and Volume of the past 14 days seperated by commas.</p>
     <br>
     <form method="POST" action="">
         <table>
@@ -14,5 +14,14 @@
         </table>
         <p><input type=submit value=Submit></p>
     </form>
+    <div>
+        {% if result != None %}
+            <h3>Predicted Closing Price:</h3>
+            <p>
+                {{result}}
+            </p>
+        {% endif %}
+    </div>
+        
     </div>
 {%endblock%}
