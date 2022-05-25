@@ -27,20 +27,39 @@ def makeFloatList(day):
 @app.route('/', methods = ['GET', 'POST'])
 def index():
     return render_template('home.html')
+
 @app.route('/mulBigInput', methods = ['GET', 'POST'])
 def mulBigInput():
     form = InputForm(request.form)
     if request.method == 'POST' and form.validate():
         app.logger.info("in post")
         day1 = makeFloatList(form.day1.data)
-        out = flask_backend.run(day1)
+        out = flask_backend.runMul(day1)
         result=str(out)
     else:
         app.logger.info('in else')
         result = None
     return render_template('mulBIGInput.html', form = form, result = result)
-# @app.route('/mulBigNoInput', methods = ['GET', 'POST'])
-# def index():
-#     return render_template('mulBIGNoInput.html')
+@app.route('/mulBigNoInput', methods = ['GET', 'POST'])
+def mulBigNoInput():
+    if request.method == 'POST':
+        out = flask_backend.runMul(None)
+        result=str(out)
+    else:
+        result = None
+    return render_template('mulBIGNoInput.html', result = result)
+
+@app.route('/uniBigInput', methods = ['GET', 'POST'])
+def uniBigInput():
+    form = InputForm(request.form)
+    if request.method == 'POST' and form.validate():
+        app.logger.info("in post")
+        day1 = [float(form.day1.data)]
+        out = flask_backend.runUni(day1)
+        result=str(out)
+    else:
+        app.logger.info('in else')
+        result = None
+    return render_template('uniBIGInput.html', form = form, result = result)
 if __name__=='__main__':
     app.run()

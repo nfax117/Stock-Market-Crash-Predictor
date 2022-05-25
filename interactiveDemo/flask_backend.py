@@ -6,7 +6,7 @@ from keras.preprocessing import sequence
 from keras import backend as K
 
 
-def run(day_info):
+def runMul(day_info):
     SNP = pd.read_csv('../SPX_500_Data.csv')
     SNP = SNP.drop(['Adj Close', 'Date','% Gain/Loss (Close)','% Price Variation'], axis=1)
     # get all attributes
@@ -25,15 +25,60 @@ def run(day_info):
 
     model.load_weights('model_weights_mulBIG.h5')
     model.compile(optimizer='adam', loss='mean_squared_error')
-    
-    day_info =  np.array(day_info)
-    day_info = np.reshape(day_info, (5, 1))
-    info = []
-    info.append([SNP_attributes[-44:,0:5]])
-    info = np.array(info)
-    info = np.reshape(info, (1,44,5))
-    info = np.append(info, day_info)
+    if day_info != None:
+        day_info =  np.array(day_info)
+        day_info = np.reshape(day_info, (5, 1))
+        info = []
+        info.append([SNP_attributes[-44:,0:5]])
+        info = np.array(info)
+        info = np.reshape(info, (1,44,5))
+        info = np.append(info, day_info)
+    else:
+        info = []
+        info.append([SNP_attributes[-45:,0:5]])
+        info = np.array(info)
     info = np.reshape(info, (1,45,5))
+    # print(info.shape())
+
+    #returns a probabilistic output, 
+    prediction = model.predict(info)
+    prediction = np.repeat(prediction,info.shape[2], axis=-1)
+    prediction = scaler.inverse_transform(prediction)[:,0]
+    return prediction
+
+    K.clear_session()
+def runUni(day_info):
+    SNP = pd.read_csv('../SPX_500_Data.csv')
+    SNP = SNP.drop(['Adj Close', 'Date','% Gain/Loss (Close)','% Price Variation'], axis=1)
+    # get all attributes
+    SNP_attributes = SNP.iloc[:,:]
+
+    # normalize the data using MinMax scaller
+    scaler = MinMaxScaler()
+    scaler.fit(SNP_attributes)
+    SNP_attributes = scaler.transform(SNP_attributes)
+
+    K.clear_session()
+    f = open("model_architecture_uniBIG.json", 'r+')
+    json_string = f.read()
+    f.close()
+    model = model_from_json(json_string)
+
+    model.load_weights('model_weights_uniBIG.h5')
+    model.compile(optimizer='adam', loss='mean_squared_error')
+    if day_info != None:
+        day_info =  np.array(day_info)
+        day_info = np.reshape(day_info, (1, 1))
+        info = []
+        info.append([SNP_attributes[-44:,0:1]])
+        info = np.array(info)
+        info = np.reshape(info, (1,44,1))
+        info = np.append(info, day_info)
+    else:
+        info = []
+        info.append([SNP_attributes[-45:,0:1]])
+        info = np.array(info)
+    info = np.reshape(info, (1,45,1))
     # print(info.shape())
 
     #returns a probabilistic output, 
