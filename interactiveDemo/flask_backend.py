@@ -51,12 +51,13 @@ def runUni(day_info):
     SNP = pd.read_csv('../SPX_500_Data.csv')
     SNP = SNP.drop(['Adj Close', 'Date','% Gain/Loss (Close)','% Price Variation'], axis=1)
     # get all attributes
-    SNP_attributes = SNP.iloc[:,:]
+    SNP_price = SNP['Close']
+    SNP_price = np.array(SNP_price)
+    SNP_price = np.reshape(SNP_price, (-1,1))
 
-    # normalize the data using MinMax scaller
-    scaler = MinMaxScaler()
-    scaler.fit(SNP_attributes)
-    SNP_attributes = scaler.transform(SNP_attributes)
+    Price_scaler = MinMaxScaler()
+    Price_scaler.fit(SNP_price)
+    SNP_price = Price_scaler.transform(SNP_price)
 
     K.clear_session()
     f = open("model_architecture_uniBIG.json", 'r+')
@@ -70,21 +71,19 @@ def runUni(day_info):
         day_info =  np.array(day_info)
         day_info = np.reshape(day_info, (1, 1))
         info = []
-        info.append([SNP_attributes[-44:,0:1]])
+        info.append([SNP_price[-44:,0:1]])
         info = np.array(info)
         info = np.reshape(info, (1,44,1))
         info = np.append(info, day_info)
     else:
         info = []
-        info.append([SNP_attributes[-45:,0:1]])
+        info.append([SNP_price[-45:,0:1]])
         info = np.array(info)
     info = np.reshape(info, (1,45,1))
-    # print(info.shape())
 
-    #returns a probabilistic output, 
     prediction = model.predict(info)
     prediction = np.repeat(prediction,info.shape[2], axis=-1)
-    prediction = scaler.inverse_transform(prediction)[:,0]
+    prediction = Price_scaler.inverse_transform(prediction)[:,0]
     return prediction
 
     K.clear_session()

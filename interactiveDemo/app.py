@@ -61,5 +61,13 @@ def uniBigInput():
         app.logger.info('in else')
         result = None
     return render_template('uniBIGInput.html', form = form, result = result)
+@app.route('/uniBigNoInput', methods = ['GET', 'POST'])
+def uniBigNoInput():
+    if request.method == 'POST':
+        out = flask_backend.runUni(None)
+        result=str(out)
+    else:
+        result = None
+    return render_template('uniBIGNoInput.html', result = result)
 if __name__=='__main__':
     app.run()
