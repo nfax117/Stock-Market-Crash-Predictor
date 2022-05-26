@@ -1,9 +1,14 @@
 {% extends 'layout.html'%}
 {%block body%}
     <div class = "modelSelectorBox">
-        <h1>S&P 500 Closing Price Predictor</h1>
+        <h1 class = "topHeader">S&P 500 Closing Price Predictor</h1>
         <div class = "modelOptions">
-            <a href={{url_for('mulBigInput')}}>Predict 09/19/2021 Closing Price</a>
+            <a href={{url_for('mulBigInput')}}>Predict 09/19/2021 Closing Price using Multivariate Model</a>
+            <a href={{url_for('mulBigNoInput')}}>Predict 09/18/2021 Closing Price using Multivariate Model</a>
+        </div>
+        <div class = "modelOptions">
+            <a href={{url_for('uniBigInput')}}>Predict 09/19/2021 Closing Price using Univariate Model</a>
+            <a href={{url_for('uniBigNoInput')}}>Predict 09/18/2021 Closing Price using Univariate Model</a>
         </div>
     </div>
 {%endblock%}

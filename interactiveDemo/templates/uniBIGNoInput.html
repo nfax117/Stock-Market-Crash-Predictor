@@ -1,0 +1,19 @@
+{% extends 'layout.html'%}
+{%block body%}
+    <div class='inputbox'>
+    <h1 class = "topHeader">Predict 09/18/2021 Closing Price</h1>
+    <p>Click Below To See 09/18/2021 Predicted Closing Price</p>
+    <form method="POST" action="{{ url_for('uniBigNoInput') }}">
+        <p class="submitP"><input type=submit value=Predict class="submitButton"></p>
+    </form>
+    <div class="displayResults">
+        {% if result != None %}
+            <h3>Predicted Closing Price:</h3>
+            <p>
+                {{result}}
+            </p>
+        {% endif %}
+    </div>
+        
+    </div>
+{%endblock%}

@@ -1,0 +1,62 @@
+body{
+    background: rgb(121, 180, 183);
+    font-family: "Nunito", sans-serif;
+}
+
+.topHeader{
+    font-weight: 100;
+    font-size: 50px;
+    color: rgb(248, 240, 223);
+    font-family: inherit;
+}
+.inputbox{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.modelSelectorBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+.submitP{
+    text-align: center;
+}
+.displayResults{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(248, 240, 223);
+    border: 10px;
+    border-radius: 12px;
+    box-shadow: 0 0 5px 2px #c7c6c6
+}
+.submitButton{
+    border-radius: 10px;
+    width: 90px;
+    height: 30px;
+    font-size: 20px;
+    font-weight: 500;
+    font-family: inherit;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s ease;
+    border: none;
+    margin: 10px;
+}
+.modelOptions{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    margin-bottom: 50px;
+}
+a{
+    font-weight: 100;
+    font-size: 30px;
+    color: black;
+    font-family: inherit;
+}
