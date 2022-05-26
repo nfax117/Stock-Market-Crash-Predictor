@@ -72,12 +72,6 @@ Parminder Singh, Yuan Chang, Nathaniel Faxon, Cesar Guzman Avina, Kanchan Kaur, 
        \href{https://github.com/nfax117/ECS171_Proj1}{Github Repository Link}
             
        \vspace{0.8cm}
-%     
-%            
-%       Department Name\\
-%       University Name\\
-%       Country\\
-%       Date
             
    \end{center}
 \end{titlepage}
@@ -99,11 +93,11 @@ If a market prediction model is built to successfully predict a stock market cra
 			\end{itemize}
 		\item Finance
 			\begin{itemize}
-				\item The finance sector is one of the most hit sectors during a crash. Predicting a crash could allow financial institutions to prepare for the consequences, like anticipating layoffs.
+				\item The finance sector is one of the most hit sectors during a crash. Predicting the market could allow financial institutions to prepare for the consequences, like anticipating layoffs.
 			\end{itemize}
 		\item Leisure and Hospitality 
 			\begin{itemize}
-				\item Leisure and hospitality companies face significant economic struggles after a crash, making it difficult for smaller companies to remain in business. Predicting a crash would allow these companies to prepare for such financial hardship, while also taking some action to keep customers, like offering discounted services that can be bought ahead of time, so customers will still participate after the crash. 
+				\item Leisure and hospitality companies face significant economic struggles after a crash, making it difficult for smaller companies to remain in business. Predicting a market downfall would allow these companies to prepare for potential financial hardship, while also taking some action to keep customers, like offering discounted services that can be bought ahead of time, so customers will still participate after the crash. 
 			\end{itemize}
 	\end{itemize}
  
@@ -116,13 +110,13 @@ Zhao et al. investigated the problem of financial time series prediction by util
 The dataset used throughout this project was supplied from Kaggle and Nasdaq. It provided us with 15032 rows which included the columns: closing, opening, low, and high prices as well as the volume, \% gain and loss, and price variation for S\&P 500. Data was taken from 1962 to 2021.\cite{SNP_Daily} 
 Below is a description of each column:
 
-The following are descriptions of the features for each observation in the data-set.
+The following are descriptions of the features for the observations in the data-set.
 
 	\begin{itemize}
 		\item Date - Trading date (YYYY-MM-DD)
-		\item Open (\#) - Market opening price
+		\item Open (\#) - Market opening price.
 		\item High (\#) - Highest price during the trading day.
-		\item Low (\#) - Lowest price during the
+		\item Low (\#) - Lowest price during the trading day.
 		\item Close (\#) - Price when the market closed for the day.
 		\item Adjusted Close (\#) - Closing price after corporate actions are accounted for.
 		\item Volume (\#) - Number of shares traded during the trading day.
@@ -144,15 +138,13 @@ The dataset was selected because of the extensive range of dates it includes as 
 
 We thought that the PE ratio would be a stronger indicator of the market’s trend, and we used an additional S\&P 500 dataset that contains the monthly PE ratio\cite{SNP_PE_Monthly}, and it is from Nasdaq. In order to facilitate the PE ratio data, we extracted the attributes of the stock market for the first day of each month, and added the PE ratio column. This becomes the condensed datasets, which contain 717 data points.
 
-PE ratio was excluded from the input attributes at the later stage, because it didn’t produce very accurate prediction models. After excluding it, we are free to use the daily stock dataset, which contains 15032 data points.
+PE ratio was excluded from the input attributes at the later stage, because it didn’t produce very accurate prediction models. After excluding it, we decided to use the daily stock dataset, which contains 15032 data points.
 
-In order to process the input data set in the correct format for time series analysis, we chose 14 data points as our time step. Essentially, we are using the first 14 data points to predict the 15th data point, and slide the window along the entire dataframe. 
+In order to process the input data set in the correct format for time series analysis, we chose 14 data points as our time step. Essentially, we are using the past 14 data point to predict a data point in the future, and repeat this process for the entire dataframe.
  
-
-
 \section{Proposed Methodology} 
 
-We will present here different models that we experimented with. They are polynomial regression, univariate and multivariate time series analysis models. 
+We will present here different models that we experimented with. They are linear regression, polynomial regression, univariate and multivariate time series analysis models. 
 
 \subsection{Polynomial and Linear Regression}
 
@@ -182,15 +174,15 @@ As seen from the figures 2 and 3, Closing price and P/E * EPS seems to have a li
 Based on the above results, there is a very high R2 score for both the linear and polynomial regressions which means that the line fits the data pretty well, thus high correlation between the two variables. There is a very high MSE, but this is due to how large the data values are and how many values there are in general. Though these models have helped show variable relationships and trends, we wanted to create more models that take into account more variables.
 
 \subsection{Univariate}
-In our most current implementation, we applied open, low, high, and volume features in addition to the closing price.
+In our next current implementation, we applied open, low, high, and volume features in addition to the closing price.
 In our second version of our implementation it came to notice that our dataset is linked to time. So we approached it now using a Long Short Term Memory neural network. We started with a univariate LSTM model where the model predicted the closing price of the next day using the previous 50 days (time step), but the model failed to predict anything. We then chose to change the time step to 14 days, as this was the most used machine learning approach on the stock market. That result was looking promising, but we then realized that using previous closing prices to predict the next closing price is not a good feature. We decided to proceed in using more than one feature in our dataset to strengthen our model. 
 
 \subsection{Multivariate}
 In our most current implementation, we applied open, low, high, and volume features in addition to the closing price.
 
-Since we were going to be predicting data points in the stock market, we knew that this would be a regression model problem. With this, we knew a neural network would need to be used to predict and find relationships between the data. Due to the fact that we are using multiple previous day values to predict the future stock price, we had to find a type of neural network that could utilize multiple sequences of data. After looking around we found that the Long Short Term Memory model was able to use multiple sequences, and then began to work with that type of model. We started with a univariate model of just using the Open price but realized that using more data (Open, Close, High, Low, and Volume) in a multivariate model was much better than the univariate.
+Since we were going to be predicting data points in the stock market, we knew that this would be a regression model problem. With this, we knew a neural network would need to be used to predict and find relationships between the data. Due to the fact that we are using multiple previous day values to predict the future stock price, we had to find a type of neural network that could utilize multiple sequences of data. After looking around we found that the Long Short Term Memory model was able to use multiple sequences, and then began to work with that type of model. We started with a univariate model of just using the Open price but realized that using more data attributes (Open, Close, High, Low, and Volume) in a multivariate model produced a more accurate model than univariate.
 
-While working on this model, we started to develop our website application so that our model could be interactive. We want to allow people to use our model and put in a date and get back an idea of the market price and whether or not there will be a crash. We use our pre-calculated data and upload it to a database to reference for when a date's data is requested.
+%While working on this model, we started to develop our website application so that our model could be interactive. We want to allow people to use our model and put in a date and get back an idea of the market price and whether or not there will be a crash. We use our pre-calculated data and upload it to a database to reference for when a date's data is requested.
 
 \subsection{Time Series Model Configuration}
 The exact configurations of the two time series models are shown below:
@@ -220,7 +212,7 @@ The exact configurations of the two time series models are shown below:
 				\item Mini batch size tested: 24 and 36, where size 36 achieved best accuracy.
 			\end{itemize}
 	\end{itemize}
-\textit{Note: that series models that were trained from the condensed data set used time step of 14, where the models trained with full data set used time step of 45.}
+\textit{Note: time series models that were trained from the condensed data set used time step of 14, where the models trained with full data set used time step of 45.}
 %While working on this model, we started to develop our website application so that our model could be interactive. We want to allow people to use our model and put in a date and get back an idea of the market price and whether or not there will be a crash. We use our pre-built and uploaded database to reference the data for the date that is requested.
 
 
@@ -234,28 +226,28 @@ The experimental results for the linear and polynomial regression models were sh
 
 In order to visualize the performance of each time series model, we plotted the entire predicted price against the actual price. Note that the condensed model plots are plotting monthly, whereas the full models are plotting daily.\\
 
-Below are the plots for the models that were trained using the condensed dataset, where it is spanning from Jan of 1962 to September of 2021, and the data is recorded monthly.
+Below are the plots for the models that were trained using the condensed dataset, where it is spanning from January of 1962 to September of 2021, and the data is recorded monthly.
 
 \begin{figure}[H]
 \subfloat[Condensed Univariate]{{\includegraphics[scale=0.3]{p7.png} }}
     \qquad
     \subfloat[Condensed Multivariate]{{\includegraphics[scale=0.3]{p8.png} }}
-    \caption{Predicted Price plots(1)}
+    \caption{Condensed plots}
     \label{fig:example}
 \end{figure}
 
-For the next two graphs, they are predicted price plots using models trained using the full dataset. The full dataset contains daily recordings of the stock market since January $2^{\text{nd}}$ 1962 till September $17^{\text{th}}$ 2021.
+The next two graphs plot the predicted price using the models trained from the full dataset. The full dataset contains daily recordings of the stock market since January $2^{\text{nd}}$ 1962 till September $17^{\text{th}}$ 2021.
 
 \begin{figure}[H]
 \subfloat[Full Univariate]{{\includegraphics[scale=0.3]{p9.png} }}
     \qquad
     \subfloat[Full Multivariate]{{\includegraphics[scale=0.3]{p10.png} }}
-    \caption{Predicted Price plots(2)}
+    \caption{Full plots}
     \label{fig:example}
 \end{figure}
 
 \subsection{MSE \& R2 scores}
-We have calculated the MSE and R2 score of all the time series models. We saw a sharp decrease of MSE error when the dataset increased from condensed to full, and an overall increase of R2 score as well. 
+We calculated the MSE and R2 score for all of the time series models. There was a sharp decrease of MSE and an overall increase of R2 score when the dataset increased from condensed to full.
 
 \begin{figure}[H]
 	\begin{center}
@@ -263,12 +255,15 @@ We have calculated the MSE and R2 score of all the time series models. We saw a 
 	\end{center}
 \end{figure}
 
-We also noticed that the highest R2 score and the lowest MSE error were both recorded on the univariate model that was trained using the full dataset. This made sense as the univariate model was using closing price's history to predict future closing price. Whereas multivariate model had attributes such as volume that might negatively impact the performance, since volume has weaker correlation to closing price compared to other attributes.  
+We also noticed that the highest R2 score and the lowest MSE were both recorded on the univariate model that was trained using the full dataset. This made sense as the univariate model was using closing price's history to predict future closing price. The multivariate model had attributes such as volume that might negatively impact the performance, since volume has weaker correlation to closing price compared to other attributes.  
 
 \section{Conclusion and Evaluation} 
-Using the datasets from Kaggle, which contained daily data about the open price, high price, low price, and closing price, volume, \% gain / loss, P/E ratio. We initially started with a linear and polynomial regression model, but we realized that the most optimal were the univariate and multivariate models. The best performance came from the univariate model of LSTM.\\
+Using the datasets from Kaggle, which contained daily data about the open price, high price, low price, and closing price, volume, \% gain/loss, P/E ratio. We initially started with a linear and polynomial regression model, but we realized that the most optimal were the univariate and multivariate models. The best performance came from the univariate model of LSTM.\\
+
 Our models were based strictly on numerical data, all the data in the dataset are taking in real world events in them. Our model cannot predict real world events in which stock market prices would make sporadic movements. So therefore, our model will not be able to capture any spikes in the stock price accurately.\\
+
 For software implementation, we created two websites to display our data. The first one was used to display the project as a whole and the other to interact with the data. The interactive site utilized Flask, a web framework for developing web applications using python. After training our model, we saved the weights as well as the model architecture to use for the website. The backend code, loads and compiles the model, gets the input data from the user and uses it to predict the closing price of either 2021-09-18 (if user chooses not to give any data).\\
+
 One of the conclusions we arrived at the end of this research project is that it is nearly impossible to predict the stock market’s closing price. In the real world, the stock market is volatile, dynamic and unpredictable. Thus, we can discuss the model’s improvements in two ways. First, since the models we produced were essentially models of the stock market of its current form, one potential improvement would be to increase the accuracy of our model. Ultimately to allow our model to mimic the stock market, at least till today. We could always increase the model’s performance through tuning the hyperparameters. In the interest of time, we only tuned the time step, number of nodes in each layer and the mini-batch size. Other than those, there are parameters such as the number of layers, activation function, regularization techniques we can try to improve the model. Furthermore, another direction to improve the model is to add additional attributes that reflect the population’s confidence level about the stock market. These kinds of attributes would be hard to quantify and produce, which may require their own machine learning models as well. Since the stock market’s closing price can be greatly influenced by people’s attitude, it would be an excellent addition to our time series model. 	
 
 
