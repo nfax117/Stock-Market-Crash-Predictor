@@ -1,7 +1,7 @@
 {% extends 'layout.html'%}
 {%block body%}
     <div class='inputbox'>
-    <h2>Predict 09/19/2021 Closing Price</h2>
+    <h1 class = "topHeader">Predict 09/19/2021 Closing Price</h1>
     <p>Please Enter the S&P 500's Closing Price for 09/18/2021.</p>
     <form method="POST" action="{{ url_for('uniBigInput') }}">
         <table>
@@ -11,9 +11,9 @@
             </tr>
             {% endfor %}
         </table>
-        <p><input type=submit value=Predict></p>
+        <p class="submitP"><input type=submit value=Predict class="submitButton"></p>
     </form>
-    <div>
+    <div class="displayResults">
         {% if result != None %}
             <h3>Predicted Closing Price:</h3>
             <p>
