@@ -11,7 +11,7 @@ app.secret_key = "super secret key"
 #P/E Ratio, Open, Low, High, Volume, and Closing Price
 
 class InputForm(Form):
-    day1 = StringField('Enter Data for 09/18/2021:', validators=[validators.InputRequired()])
+    day1 = StringField('Enter Data for 09/20/2021:', validators=[validators.InputRequired()])
 
 def makeFloatList(day):
     #remove any white space
