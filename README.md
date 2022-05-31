@@ -20,9 +20,8 @@
 - `./project_report` - Latex files and pdf for the project report, as well as all the suporting figures.
 - `data_visual.ipynb` - Notebook for producing charts and graphs as data visualizations.
 - `NN_big.ipynb` - Notebook containing the implementations for the time series models trained with the full data sets. 
-- `NN_Interactive.ipynb` - Cesar
 - `NN.ipynb` - Notebook containing the implementations for the time series models trained with the condensed data sets. 
-- `PlotsForDatAnalysis.ipynb` - Nate
+- `PlotsForDatAnalysis.ipynb` - Notebook to get graphs for the project report which display the trend in the attributes we used for the model.
 - `poly_lin_regression.ipynb` - Nate
 - `SP500_PE-EPS_and_Closing.csv` - Nate
 - `SP500.csv` - CSV file containing the monthly recording of the SNP stock market with various attributes. This is the condensed data set.
