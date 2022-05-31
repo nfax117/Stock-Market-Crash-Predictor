@@ -40,11 +40,10 @@
 ## Building models
 --
 ## Interactive model
--- To use the interactive model, after installing the necessary libraries go into the "interactiveDemo" directory. Once inside run "python3 app.py" in the command line. Ensure that you are running python 3.7+ and all specified libraries are downloaded. Once finished compiling, it sets up the interactive demo website on your local machine. The link to it is printed on the terminal, copy and paste this to your chrome browser and you are now free to use the interactive website.
+To use the interactive model, after installing the necessary libraries go into the "interactiveDemo" directory. Once inside run "python3 app.py" in the command line. Ensure that you are running python 3.7+ and all specified libraries are downloaded. Once finished compiling, it sets up the interactive demo website on your local machine. The link to it is printed on the terminal, copy and paste this to your chrome browser and you are now free to use the interactive website.
 
 ## Our Progress
--- Here is an additional website showcasing our progress.
--- https://nfax117.github.io/ECS171_Proj1/
+Here is an additional website showcasing our progress: https://nfax117.github.io/ECS171_Proj1/
 # Group Members
 
 - Sergio Santoyo
