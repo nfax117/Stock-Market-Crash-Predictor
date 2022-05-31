@@ -67,10 +67,6 @@
 
        \textbf{Group member:}\\
 Parminder Singh, Yuan Chang, Nathaniel Faxon, Cesar Guzman Avina, Kanchan Kaur, Will Colbert, Sergio Santoyo
-
-       \vfill
-       \href{https://github.com/nfax117/ECS171_Proj1}{Github Repository Link}
-            
        \vspace{0.8cm}
             
    \end{center}
@@ -264,8 +260,11 @@ Our models were based strictly on numerical data, all the data in the dataset ar
 
 For software implementation, we created two websites to display our data. The first one was used to display the project as a whole and the other to interact with the data. The interactive site utilized Flask, a web framework for developing web applications using python. After training our model, we saved the weights as well as the model architecture to use for the website. The backend code, loads and compiles the model, gets the input data from the user and uses it to predict the closing price of either 2021-09-18 (if user chooses not to give any data).\\
 
-One of the conclusions we arrived at the end of this research project is that it is nearly impossible to predict the stock market’s closing price. In the real world, the stock market is volatile, dynamic and unpredictable. Thus, we can discuss the model’s improvements in two ways. First, since the models we produced were essentially models of the stock market of its current form, one potential improvement would be to increase the accuracy of our model. Ultimately to allow our model to mimic the stock market, at least till today. We could always increase the model’s performance through tuning the hyperparameters. In the interest of time, we only tuned the time step, number of nodes in each layer and the mini-batch size. Other than those, there are parameters such as the number of layers, activation function, regularization techniques we can try to improve the model. Furthermore, another direction to improve the model is to add additional attributes that reflect the population’s confidence level about the stock market. These kinds of attributes would be hard to quantify and produce, which may require their own machine learning models as well. Since the stock market’s closing price can be greatly influenced by people’s attitude, it would be an excellent addition to our time series model. 	
+One of the conclusions we arrived at the end of this research project is that it is nearly impossible to predict the stock market’s closing price. In the real world, the stock market is volatile, dynamic and unpredictable. Thus, we can discuss the model’s improvements in two ways. First, since the models we produced were essentially models of the stock market of its current form, one potential improvement would be to increase the accuracy of our model. Ultimately to allow our model to mimic the stock market, at least till today. We could always increase the model’s performance through tuning the hyperparameters. In the interest of time, we only tuned the time step, number of nodes in each layer and the mini-batch size. Other than those, there are parameters such as the number of layers, activation function, regularization techniques we can try to improve the model. Furthermore, another direction to improve the model is to add additional attributes that reflect the population’s confidence level about the stock market. These kinds of attributes would be hard to quantify and produce, which may require their own machine learning models as well. Since the stock market’s closing price can be greatly influenced by people’s attitude, it would be an excellent addition to our time series model.\\
 
+All implementations about model design, interactive models, data sets used and other documents are on the below github repository.\\
+\href{https://github.com/nfax117/ECS171_Proj1}{Github Repository Link}
+            
 
 \begin{thebibliography}{9}
 \bibitem{LSTM}
