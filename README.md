@@ -29,14 +29,22 @@
 - `SPX_500_Data.csv` - CSV file containing the daily recordings of the SNP stock market with different attributes. This is the full data set. 
 
 # Libraries used
- - 
+ - Flask
+ - WTForms
+ - keras
+ - numpy
+ - pandas
+ - sklearn
 
-# Instruction
+# Instructions
 ## Building models
 --
 ## Interactive model
-TODO: cesar please add your instructions here
+-- To use the interactive model, after installing the necessary libraries go into the "interactiveDemo" directory. Once inside run "python3 app.py" in the command line. Ensure that you are running python 3.7+ and all specified libraries are downloaded. Once finished compiling, it sets up the interactive demo website on your local machine. The link to it is printed on the terminal, copy and paste this to your chrome browser and you are now free to use the interactive website.
 
+## Our Progress
+-- Here is an additional website showcasing our progress.
+-- https://nfax117.github.io/ECS171_Proj1/
 # Group Members
 
 - Sergio Santoyo
