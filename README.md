@@ -7,6 +7,15 @@
 ![Example](./project_report/p7.png)
 ![Example](./project_report/p8.png)
 
+# Libraries used
+ - 
+
+# Instruction
+## Building models
+--
+## Interactive model
+TODO: cesar please add your instructions here
+
 # Group Members
 
 - Sergio Santoyo
