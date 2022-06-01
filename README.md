@@ -6,6 +6,7 @@
 
 ![Example](./project_report/p7.png)
 ![Example](./project_report/p8.png)
+# 
 
 # Project Organization
 
@@ -38,7 +39,30 @@
 
 # Instructions
 ## Building models
---
+The jupyter notebooks, `NN.ipynb` and `NN_big.ipynb`, contains the time series models' implementations. The differences between them are minimal. `NN.ipynb` will read the condensed data set and have the correct data processing procedures. 
+The two notebooks follow a similar work flow:
+1. Import libraries
+2. Data preprocessing 
+    - Import csv file
+    - Definitions for hyperparamaters
+    - Standardarizing the data frame
+    - Training/test split
+    - Create testing/training data for time series model
+3. NN model creation and training
+4. *Saving/loading model(optional)*
+5. Creating the testing data frame, for testing partial or entire time frame.
+6. Plotting the results
+7. Model performance calculation.
+
+*Note: please comment out `model.save` in block 68 to prevent overriding the saved trained models in the repo.*
+
+Some of the variable naming style used in the notebooks are as follows:
+    - `X_test` - testing data frame for univariate model, contains $20\%$ of the input data set.
+    - `X_test_mul` - testing data frame for multivariate model, contains $20\%$ of the input data set.
+    - `X_test_full` - testing data frame for univartiate model, contains the entire input data set.
+    - `X_test__mul_full` - testing data frame for multivartiate model, contains the entire input data set.
+
+
 ## Interactive model
 To use the interactive model, after installing the necessary libraries go into the "interactiveDemo" directory. Once inside run "python3 app.py" in the command line. Ensure that you are running python 3.7+ and all specified libraries are downloaded. Once finished compiling, it sets up the interactive demo website on your local machine. The link to it is printed on the terminal, copy and paste this to your chrome browser and you are now free to use the interactive website.
 
