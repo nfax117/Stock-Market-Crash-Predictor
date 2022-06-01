@@ -36,9 +36,11 @@
  - numpy
  - pandas
  - sklearn
+ - matplotlib
+ - tensorflow
 
 # Instructions
-## Building models
+## Time series models
 The jupyter notebooks, `NN.ipynb` and `NN_big.ipynb`, contains the time series models' implementations. The differences between them are minimal. `NN.ipynb` will read the condensed data set and have the correct data processing procedures. 
 The two notebooks follow a similar work flow:
 1. Import libraries
@@ -57,11 +59,13 @@ The two notebooks follow a similar work flow:
 *Note: please comment out `model.save` in block 68 to prevent overriding the saved trained models in the repo.*
 
 Some of the variable naming style used in the notebooks are as follows:
-    - `X_test` - testing data frame for univariate model, contains $20\%$ of the input data set.
-    - `X_test_mul` - testing data frame for multivariate model, contains $20\%$ of the input data set.
-    - `X_test_full` - testing data frame for univartiate model, contains the entire input data set.
-    - `X_test__mul_full` - testing data frame for multivartiate model, contains the entire input data set.
+- `X_test` - testing data frame for univariate model, contains $20\%$ of the input data set. 
 
+- `X_test_mul` - testing data frame for multivariate model, contains $20\%$ of the input data set.
+
+- `X_test_full` - testing data frame for univartiate model, contains the entire input data set.
+
+- `X_test__mul_full` - testing data frame for multivartiate model, contains the entire input data set.
 
 ## Interactive model
 To use the interactive model, after installing the necessary libraries go into the "interactiveDemo" directory. Once inside run "python3 app.py" in the command line. Ensure that you are running python 3.7+ and all specified libraries are downloaded. Once finished compiling, it sets up the interactive demo website on your local machine. The link to it is printed on the terminal, copy and paste this to your chrome browser and you are now free to use the interactive website.
@@ -78,4 +82,4 @@ Here is an additional website showcasing our progress: https://nfax117.github.io
 - Kanchan Kaur
 - Parminder Singh
 
-Last updated on May 23rd, 2022
+Last updated on May 31st, 2022
